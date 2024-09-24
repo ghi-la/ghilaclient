@@ -9,14 +9,16 @@ const INITIAL_STATE: User = {
 
 const routeReducer = (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
-    case 'SET_LOGGED_USER':
+    case 'SET_USER':
       return {
         ...state,
-        id: action.payload.id,
+        id: action.payload._id,
         username: action.payload.username,
         email: action.payload.email,
-        password_hash: action.payload.password_hash,
+        password_hash: action.payload.password,
       };
+    case 'CLEAR_USER':
+      return INITIAL_STATE;
     default:
       return state;
   }

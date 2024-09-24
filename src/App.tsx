@@ -1,24 +1,26 @@
-import { Button, Snackbar } from '@mui/joy';
+import { Snackbar } from '@mui/joy';
 import { useDispatch, useSelector } from 'react-redux';
+// import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Spinner from './Components/Spinner';
-import Login from './Views/Login/Login';
-import {
-  closeSnackbar,
-  isLoaded,
-  isLoading,
-  openSnackbar,
-} from './store/actions';
-import { checkHealth } from './store/services/userService';
+import { closeSnackbar } from './store/actions';
+import Dashboard from './Views/Dashboard/Dashboard';
+import Login from './Views/UsersRelated/Login';
 
 function App() {
   const dispatch = useDispatch();
   const snackbar = useSelector((state: any) => state.app.snackbar);
   const loading = useSelector((state: any) => state.app.isLoading);
+  const user = useSelector((state: any) => state.user);
 
   return (
     <>
-      <Button
+      {/* <BrowserRouter>
+        <Routes>
+          <Route path="/home" element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter> */}
+      {/* <Button
         variant="solid"
         color="primary"
         onClick={() => {
@@ -36,8 +38,8 @@ function App() {
         }}
       >
         API Healt check
-      </Button>
-      <Login />
+      </Button> */}
+      {user?.username ? <Dashboard /> : <Login />}
       <Spinner open={loading} />
       <Snackbar
         open={snackbar?.isOpen}

@@ -1,3 +1,5 @@
+import { User } from './types';
+
 export const isLoading = () => ({
   type: 'IS_LOADING',
 });
@@ -18,4 +20,15 @@ export const closeSnackbar = () => ({
   payload: {
     isOpen: false,
   },
+});
+
+// USER ACTIONS
+export const setUser = (user: User) => ({
+  type: 'SET_USER',
+  payload: {
+    user,
+  },
+});
+export const clearUser = () => ({
+  type: 'CLEAR_USER',
 });
