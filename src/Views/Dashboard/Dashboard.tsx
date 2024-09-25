@@ -1,16 +1,15 @@
 import { Button } from '@mui/joy';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../store/services/userService';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.user);
 
   const handleLogout = () => {
-    logout().then(() => {
-      dispatch({ type: 'CLEAR_USER' });
-    });
-    // document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    // logout().then(() => {
+    dispatch({ type: 'CLEAR_USER' });
+    // });
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   };
 
   return (
