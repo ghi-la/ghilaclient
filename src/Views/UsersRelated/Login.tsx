@@ -16,7 +16,7 @@ const Login = () => {
       .then((response) => {
         dispatch(openSnackbar('success', 'Login successful'));
         // console.log('response', response);
-        setCookie('token', response.token, 15);
+        // setCookie('token', response.token, 15);
 
         dispatch({ type: 'SET_USER', payload: response.user });
       })
