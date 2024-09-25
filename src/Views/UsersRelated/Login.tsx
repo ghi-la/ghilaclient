@@ -15,7 +15,8 @@ const Login = () => {
     login(username, password)
       .then((response) => {
         dispatch(openSnackbar('success', 'Login successful'));
-        console.log('response', response);
+        // console.log('response', response);
+        setCookie('token', response.token, 15);
 
         dispatch({ type: 'SET_USER', payload: response.user });
       })
@@ -26,6 +27,13 @@ const Login = () => {
         dispatch(isLoaded());
       });
   };
+
+  function setCookie(name: string, value: string, minutes: number) {
+    const date = new Date();
+    date.setTime(date.getTime() + minutes * 60 * 1000); // Convert minutes to milliseconds
+    const expires = `expires=${date.toUTCString()}`;
+    document.cookie = `${name}=${value}; ${expires}; path=/; Secure; SameSite=None`;
+  }
 
   return (
     <div>
