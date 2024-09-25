@@ -16,6 +16,7 @@ export const login = async (username: string, password: string) => {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
     body: JSON.stringify({ username, password }),
   });
 
@@ -37,4 +38,13 @@ export const logout = async () => {
   }
 
   throw new Error('Logout failed');
+};
+export const getLoggedUser = async () => {
+  const response = await fetch(`${BASE_URL}/user`, {
+    method: 'GET',
+    mode: 'cors', // Enable CORS
+    credentials: 'include', // Send cookies
+  });
+
+  return response.json();
 };

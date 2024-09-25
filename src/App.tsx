@@ -1,9 +1,11 @@
 import { Snackbar } from '@mui/joy';
 import { useDispatch, useSelector } from 'react-redux';
 // import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
 import './App.css';
 import Spinner from './Components/Spinner';
-import { closeSnackbar } from './store/actions';
+import { closeSnackbar, isLoaded, isLoading } from './store/actions';
+import { getLoggedUser } from './store/services/userService';
 import Dashboard from './Views/Dashboard/Dashboard';
 import Login from './Views/UsersRelated/Login';
 
@@ -12,6 +14,17 @@ function App() {
   const snackbar = useSelector((state: any) => state.app.snackbar);
   const loading = useSelector((state: any) => state.app.isLoading);
   const user = useSelector((state: any) => state.user);
+
+  useEffect(() => {
+    dispatch(isLoading());
+    getLoggedUser()
+      .then((res) => {
+        dispatch({ type: 'SET_USER', payload: res });
+      })
+      .finally(() => {
+        dispatch(isLoaded());
+      });
+  }, []);
 
   return (
     <>
