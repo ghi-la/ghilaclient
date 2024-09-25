@@ -1,5 +1,6 @@
 import { Button } from '@mui/joy';
 import { useDispatch, useSelector } from 'react-redux';
+import { setCookie } from '../../utils/cookieHelper';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -9,7 +10,7 @@ const Dashboard = () => {
     // logout().then(() => {
     dispatch({ type: 'CLEAR_USER' });
     // });
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    setCookie('token', '', 0);
   };
 
   return (

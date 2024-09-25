@@ -39,11 +39,15 @@ export const logout = async () => {
 
   throw new Error('Logout failed');
 };
-export const getLoggedUser = async () => {
+export const getLoggedUser = async (token: string) => {
   const response = await fetch(`${BASE_URL}/user`, {
-    method: 'GET',
-    mode: 'cors', // Enable CORS
-    credentials: 'include', // Send cookies
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({ token }),
   });
 
   return response.json();

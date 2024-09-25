@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { isLoaded, isLoading, openSnackbar } from '../../store/actions';
 import { login } from '../../store/services/userService';
+import { setCookie } from '../../utils/cookieHelper';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -27,13 +28,6 @@ const Login = () => {
         dispatch(isLoaded());
       });
   };
-
-  function setCookie(name: string, value: string, minutes: number) {
-    const date = new Date();
-    date.setTime(date.getTime() + minutes * 60 * 1000); // Convert minutes to milliseconds
-    const expires = `expires=${date.toUTCString()}`;
-    document.cookie = `${name}=${value}; ${expires}; path=/; Secure; SameSite=None`;
-  }
 
   return (
     <div>

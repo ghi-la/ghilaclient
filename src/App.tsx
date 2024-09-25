@@ -6,6 +6,7 @@ import './App.css';
 import Spinner from './Components/Spinner';
 import { closeSnackbar, isLoaded, isLoading } from './store/actions';
 import { getLoggedUser } from './store/services/userService';
+import { getCookie } from './utils/cookieHelper';
 import Dashboard from './Views/Dashboard/Dashboard';
 import Login from './Views/UsersRelated/Login';
 
@@ -16,8 +17,13 @@ function App() {
   const user = useSelector((state: any) => state.user);
 
   useEffect(() => {
+    // console.log(getCookie('token'));
+    const token = getCookie('token');
+    if (!token) {
+      return;
+    }
     dispatch(isLoading());
-    getLoggedUser()
+    getLoggedUser(getCookie('token'))
       .then((res) => {
         dispatch({ type: 'SET_USER', payload: res });
       })
