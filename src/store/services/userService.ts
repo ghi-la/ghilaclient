@@ -4,7 +4,6 @@ export const checkHealth = async () => {
   const response = await fetch(`${BASE_URL}/health`, {
     method: 'GET',
     mode: 'cors', // Enable CORS
-    credentials: 'include', // Send cookies
   });
 };
 
@@ -16,7 +15,6 @@ export const login = async (username: string, password: string) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    credentials: 'include',
     body: JSON.stringify({ username, password }),
   });
 
@@ -30,7 +28,6 @@ export const logout = async () => {
   const response = await fetch(`${BASE_URL}/logout`, {
     method: 'POST',
     mode: 'cors',
-    credentials: 'include',
   });
 
   if (response.ok) {
@@ -47,7 +44,6 @@ export const getLoggedUser = async (token: string) => {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    // credentials: 'include',
   });
 
   return response.json();
