@@ -19,6 +19,7 @@ const Login = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
         setCookie('token', response.token, 15);
 
         dispatch({ type: 'SET_USER', payload: response.user });
+        onClose();
       })
       .catch((err) => {
         dispatch(openSnackbar('danger', 'Login failed'));
