@@ -1,6 +1,7 @@
 import { Button } from '@mui/joy';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCookie } from '../../utils/cookieHelper';
+import ServicesList from './ServicesList';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Dashboard = () => {
         Logout
       </Button>
       <h1>Welcome {user.username}</h1>
+      <ServicesList />
     </>
   );
 };

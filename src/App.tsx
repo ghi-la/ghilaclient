@@ -1,14 +1,15 @@
 import { Snackbar } from '@mui/joy';
-import { useDispatch, useSelector } from 'react-redux';
-// import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Spinner from './Components/Spinner';
+import ComprobioManagerHome from './pages/ComprobioManager';
+import FinanceManagerHome from './pages/FinanceManagerHome';
 import { closeSnackbar, isLoaded, isLoading } from './store/actions';
 import { getLoggedUser } from './store/services/userService';
 import { getCookie } from './utils/cookieHelper';
-import Dashboard from './Views/Dashboard/Dashboard';
-import Login from './Views/UsersRelated/Login';
+import Landing from './Views/Landing';
 
 function App() {
   const dispatch = useDispatch();
@@ -34,31 +35,12 @@ function App() {
 
   return (
     <>
-      {/* <BrowserRouter>
-        <Routes>
-          <Route path="/home" element={<Dashboard />} />
-        </Routes>
-      </BrowserRouter> */}
-      {/* <Button
-        variant="solid"
-        color="primary"
-        onClick={() => {
-          dispatch(isLoading());
-          checkHealth()
-            .then((res) => {
-              dispatch(openSnackbar('success', 'API is healthy'));
-            })
-            .catch((err) => {
-              dispatch(openSnackbar('danger', 'API is not healthy'));
-            })
-            .finally(() => {
-              dispatch(isLoaded());
-            });
-        }}
-      >
-        API Healt check
-      </Button> */}
-      {user?.username ? <Dashboard /> : <Login />}
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/finance" element={<FinanceManagerHome />} />
+        <Route path="/comprobio" element={<ComprobioManagerHome />} />
+      </Routes>
+
       <Spinner open={loading} />
       <Snackbar
         open={snackbar?.isOpen}
