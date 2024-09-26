@@ -40,15 +40,14 @@ export const logout = async () => {
   throw new Error('Logout failed');
 };
 export const getLoggedUser = async (token: string) => {
-  console.log('TOKEN: ', token)
   const response = await fetch(`${BASE_URL}/user`, {
-    method: 'POST',
+    method: 'GET',
     mode: 'cors',
     headers: {
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    credentials: 'include',
-    body: JSON.stringify({ token }),
+    // credentials: 'include',
   });
 
   return response.json();
